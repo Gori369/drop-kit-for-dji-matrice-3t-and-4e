@@ -1,0 +1,48 @@
+#include <Servo.h>
+
+Servo servomotor;
+
+const int servoPin = 3;
+const int ldrPin = A1;
+const int buttonPin = 4;
+
+int ldrThreshold = 300;
+
+// Servo angle limits
+const int SERVO_MIN_ANGLE = 0;    // 0 degree
+const int SERVO_MAX_ANGLE = 170;  // 170 degree
+
+// Adjusted pulse range for full travel
+const int SERVO_PULSE_MIN = 600;   // Slightly increased to ensure full 0 degree
+const int SERVO_PULSE_MAX = 2400;
+
+enum ServoState { POSITION_MIN, POSITION_MAX };
+ServoState currentState = POSITION_MIN;
+
+void setup() {
+  servomotor.attach(servoPin, SERVO_PULSE_MIN, SERVO_PULSE_MAX);
+  servomotor.write(SERVO_MIN_ANGLE);
+  pinMode(buttonPin, INPUT_PULLUP);
+}
+
+void loop() {
+  int ldrValue = analogRead(ldrPin);
+  bool buttonPressed = (digitalRead(buttonPin) == LOW);
+
+  int desiredAngle;
+
+  if (ldrValue < ldrThreshold) {
+    // Dark → default left
+    desiredAngle = buttonPressed ? SERVO_MAX_ANGLE : SERVO_MIN_ANGLE;
+  } else {
+    // Light → default right
+    desiredAngle = buttonPressed ? SERVO_MIN_ANGLE : SERVO_MAX_ANGLE;
+  }
+
+  if (desiredAngle != currentState) {
+    servomotor.write(desiredAngle);
+    currentState = desiredAngle;
+  }
+
+  delay(100); // Maintain smoothness
+}
