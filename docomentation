@@ -1,0 +1,20 @@
+{{{use 5volt ardunio pro mini version }}}
+first you need ardunio pro mini and cp2102  
+ you can watch totorial on yt how  to download cp2102 driver for window            https://youtu.be/kecsB87cT74?si=J9xCEw2anYnMI8q_
+ wiring a cp2102 with ardunio 
+   
+    follow this pinout connection
+   
+ardunio                        cp2102
+tx                               rx
+rxi                              tx
+vcc                              5v     if you ardunio 3.3v verson than connect on 3.3v pin not 5 v
+gnd                              gnd
+  
+  download ardunio ide  
+  connect ardunio and cp2102 with pc click on upload   (code will be in code folder ) when uploading start imdiatly press ardunio reset button if you late press code fail to upload 
+  after uploading connect other components (wiring diagram in diagram folder ) and fit in 3d boady (3d file also avelable in 3d file )  best material is petg donot use pla its very lite easy to break 
+  now you ready to go ...................................
+  total cost to build  30 doller    /15000pkr   i use high quality servo kyosho prefex 12mg servo     and petg material to print 
+  for any question  email   mobi8923@gmail.com
+  
